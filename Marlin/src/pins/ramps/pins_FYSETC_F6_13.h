@@ -262,12 +262,20 @@
 
   #elif HAS_MARLINUI_U8GLIB || HAS_MARLINUI_HD44780
 
-    #define LCD_PINS_RS                       16
-    #define LCD_PINS_ENABLE                   17
-    #define LCD_PINS_D4                       23
-    #define LCD_PINS_D5                       25
-    #define LCD_PINS_D6                       27
-    #define LCD_PINS_D7                       29
+    #if ENABLED(CR10_STOCKDISPLAY)
+      #define LCD_PINS_RS         27
+      #define LCD_PINS_ENABLE     29
+      #define LCD_PINS_D4         25
+
+      #define KILL_PIN            41
+    #else
+      #define LCD_PINS_RS                       16
+      #define LCD_PINS_ENABLE                   17
+      #define LCD_PINS_D4                       23
+      #define LCD_PINS_D5                       25
+      #define LCD_PINS_D6                       27
+      #define LCD_PINS_D7                       29
+    #endif
 
     #if ENABLED(MKS_MINI_12864)
       #define DOGLCD_CS                       25
@@ -280,7 +288,11 @@
 
   #endif
 
-  #if IS_NEWPANEL
+  #if ENABLED(CR10_STOCKDISPLAY)
+    #define BTN_EN1             17
+    #define BTN_EN2             23
+    #define BTN_ENC             35
+  #elif IS_NEWPANEL
     #define BTN_EN1                           31
     #define BTN_EN2                           33
     #define BTN_ENC                           35
